@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Pathfinding;
 using ThronefallMP.Components;
 using ThronefallMP.Network.Packets.Game;
 using UnityEngine;
@@ -44,9 +45,9 @@ public class EnemySpawnerPatch
 	    treasureHunterActive.Value = false;
 	    original(self);
 	    treasureHunterActive.Value = old;
-	    if (self.FinalWaveComingUp && old && Plugin.Instance.Network.Server)
+	    if (self.FinalWaveComingUp(self.Wavenumber) && old && Plugin.Instance.Network.Server)
 	    {
-		    GlobalData.Balance += PerkManager.instance.treasureHunterGoldAmount;
+		    GlobalData.Balance += PerkManager.instance.treasureHunterGoldAmountWave3;
 	    }
     }
 
@@ -106,7 +107,7 @@ public class EnemySpawnerPatch
 		
 		waitBeforeNextSpawn.Value = self.interval;
 		var randomPointOnSpawnLine = self.GetRandomPointOnSpawnLine(
-			self.enemyPrefab.GetComponentInChildren<TaggedObject>().Tags.Contains(TagManager.ETag.Flying));
+			self.enemyPrefab.GetComponentInChildren<TaggedObject>().Tags.Contains(TagManager.ETag.Flying), new NNConstraint()); // The NNConstrain doesn't seem to do anything
 
 		var coins = 0;
 		var spawnedUnits = Traverse.Create(self).Field<int>("spawnedUnits");

@@ -30,14 +30,7 @@ public static class NightCallPatch
         if (active.Value)
         {
             var player = data.GetComponent<PlayerInteraction>();
-            if (SettingsManager.Instance.UseLargeInGameUI)
-            {
-                self.scaleParent.localScale = Vector3.one * 1.5f;
-            }
-            else
-            {
-                self.scaleParent.localScale = Vector3.one;
-            }
+            self.scaleParent.localScale = Vector3.one * SettingsManager.Instance.UiReferenceResolutionFactor;
             
             if (data.SharedData.CallNightButton && player.IsFreeToCallNight)
             {

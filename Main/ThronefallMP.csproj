@@ -44,11 +44,17 @@
     <Reference Include="com.rlabrecque.steamworks.net">
       <HintPath>..\lib\com.rlabrecque.steamworks.net.dll</HintPath>
     </Reference>
+    <Reference Include="PackageTools">
+      <HintPath>../lib/PackageTools.dll</HintPath>
+    </Reference>
     <Reference Include="MMHOOK_Assembly-CSharp">
       <HintPath>..\lib\MMHOOK_Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="MoreMountains.Feedbacks">
       <HintPath>..\lib\MoreMountains.Feedbacks.dll</HintPath>
+    </Reference>
+    <Reference Include="Drawing">
+      <HintPath>../lib/Drawing.dll</HintPath>
     </Reference>
     <Reference Include="MPUIKit">
       <HintPath>..\lib\MPUIKit.dll</HintPath>
@@ -75,8 +81,4 @@
     <None Remove="Assets\blank.png" />
     <EmbeddedResource Include="Assets\blank.png" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="powershell.exe -NonInteractive -executionpolicy Unrestricted -file $(SolutionDir)\install.ps1 $(SolutionDir) $(OutDir)&#xA;powershell.exe -NonInteractive -executionpolicy Unrestricted -file $(SolutionDir)\package.ps1 $(SolutionDir) $(OutDir) $(ConfigurationName)" />
-  </Target>
 </Project>

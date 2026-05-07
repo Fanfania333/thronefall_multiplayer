@@ -70,11 +70,11 @@ public static class PlayerInteractionPatch
             {
                 focussedInteractor.Value.InteractionBegin(self);
             }
-            else if (self.EquippedWeapon != null)
+            /*else if (self.EquippedWeapon != null) TEMPORARY - Do not know how to fix this.
             {
                 var packet = new ManualAttackPacket { Player = data.id };
                 Plugin.Instance.Network.Send(packet, true);
-            }
+            }*/
         }
 
         if (focussedInteractor.Value != null)
